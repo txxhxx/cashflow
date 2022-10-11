@@ -2,6 +2,8 @@ import { gql } from "apollo-server-express";
 import { makeExecutableSchema } from "@graphql-tools/schema";
 import { merge } from "lodash";
 
+import * as transaciton from "./transaction";
+
 const typeDefs = gql`
   scalar Date
 
@@ -24,8 +26,8 @@ const resolvers = {
 };
 
 const schema = makeExecutableSchema({
-  typeDefs: [typeDefs],
-  resolvers: merge(resolvers),
+  typeDefs: [typeDefs, transaciton.typeDefs],
+  resolvers: merge(resolvers, transaciton.resolver),
 });
 
 export default schema;
